@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'groovyx.android'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "dz.crystalbox.groovyandroidtemplate"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // because of issue with android-apt
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
+}
+// to avoid an issue with Volley
+androidGroovy {
+    options {
+        configure(groovyOptions) {
+            encoding = 'UTF-8'
+            forkOptions.jvmArgs = ['-noverify']
+            // maybe necessary if you use Google Play Services
+        }
+        sourceCompatibility = '1.7'
+        // as of 0.3.9 these are automatically set based off the android plugin's
+        targetCompatibility = '1.7'
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
+
+    compile 'org.codehaus.groovy:groovy:2.4.4:grooid'
+
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.arasthel:swissknife:1.4.0'
+
+    compile 'dev.dworks.libs:volleyplus:0.1.4'
+
+    compile 'com.github.satyan:sugar:1.5'
+
+    compile 'com.google.dagger:dagger:2.11'
+    compile 'com.google.dagger:dagger-android:2.11'
+    //    compile 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
+    apt 'com.google.dagger:dagger-compiler:2.11'
+    apt 'com.google.dagger:dagger-android-processor:2.11'
+
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude group: 'org.codehaus.groovy'
+        exclude group: 'junit'
+    }
+
+    testCompile 'junit:junit:4.12'
+
+}

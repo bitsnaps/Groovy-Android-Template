@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GroovyAndroidTemplate</string>
+    <string name="title_activity_crud">CrudActivity</string>
+</resources>

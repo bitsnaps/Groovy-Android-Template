@@ -1,2 +1,2 @@
-# Groovy-Android-Template
-Groovy Android Template project
+# Groovy Android Template 
+Groovy Android Template project is an example proof-of-concept of an example of MVC android application using Groovy and combination of groovy-andorid plugins: SwissKnife, Dagger2, SugarORM, Spock
