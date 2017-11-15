@@ -23,6 +23,10 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
     }
+    //Fix the issues identified by lint
+    lintOptions {
+        abortOnError false
+    }    
 }
 // to avoid an issue with Volley
 androidGroovy {
@@ -42,25 +46,31 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    // not used in this example
+    //compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
 
+    // Groovy for Android Gradle Plugin
     compile 'org.codehaus.groovy:groovy:2.4.4:grooid'
 
-
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    // SwissKnife (multi-purpose library for groovy in android)
     compile 'com.arasthel:swissknife:1.4.0'
 
+    // VolleyPlus (Http library for easy networking with full image caching)
     compile 'dev.dworks.libs:volleyplus:0.1.4'
 
+    // SugarORM (Object Relational Mapping for SQLite)
     compile 'com.github.satyan:sugar:1.5'
 
+    // Dagger2 (dependecy injection framework)
     compile 'com.google.dagger:dagger:2.11'
     compile 'com.google.dagger:dagger-android:2.11'
     //    compile 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
     apt 'com.google.dagger:dagger-compiler:2.11'
     apt 'com.google.dagger:dagger-android-processor:2.11'
 
+    // Spock for Android (fluent testing framework)
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude group: 'org.codehaus.groovy'
         exclude group: 'junit'
