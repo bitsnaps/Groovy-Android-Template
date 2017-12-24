@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GroovyAndroidTemplate.iml" filepath="$PROJECT_DIR$/GroovyAndroidTemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Groovy-Android-Template.iml" filepath="$PROJECT_DIR$/Groovy-Android-Template.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
