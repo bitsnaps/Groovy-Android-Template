@@ -15,7 +15,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dz.crystalbox.groovyandroidtemplate.MainActivity" />
         </activity>
+
+        <!-- Database Attributes -->
+        <meta-data android:name="DATABASE" android:value="users.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="dz.crystalbox.groovyandroidtemplate.model" />
+
     </application>
+
+
 
 </manifest>

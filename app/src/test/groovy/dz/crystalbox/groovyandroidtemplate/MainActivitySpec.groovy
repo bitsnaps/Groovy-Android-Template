@@ -1,16 +1,18 @@
 package dz.crystalbox.groovyandroidtemplate
 
-//@Config(shadows = [MainActivity], constants = BuildConfig)// manifest = "src/main/AndroidManifest.xml")
-class MainActivitySpec extends spock.lang.Specification  {
-    def "should find text view and compare text value"() {
+import dz.crystalbox.groovyandroidtemplate.model.Person
+import groovy.transform.CompileStatic
+import spock.lang.Specification
+
+@CompileStatic
+class MainActivitySpec extends Specification  {
+
+    def "should calculate a total"() {
         given:
-//        def mainActivity = Robolectric.buildActivity(MainActivity).create().get()
-            int total; int x = 2; int y = 2
+            int total; int x = 2; int y = 1
         when:
-//        def text = mainActivity.txtView.text
-        total = x + y
+            total = x + y
         then:
-//        text != ''
-        total == 4
+            total == 3
     }
 }

@@ -14,7 +14,7 @@ import groovy.transform.TupleConstructor
 //@Builder
 @TupleConstructor
 @Parcelable //(exclude={anotherObject;andThisToo}) // you can exclude other objects to avoid circular dependencies
-@Table(name = 'users')
+//@Table(name = 'users')
 class Person extends SugarRecord {
 
 //    @DatabaseField(generatedId = true)

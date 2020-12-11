@@ -1,11 +1,13 @@
 package dz.crystalbox.groovyandroidtemplate.vendor;
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.cache.plus.ImageCache
+import com.android.volley.cache.plus.ImageLoader
 import com.android.volley.toolbox.Volley
-//import android.support.v4.util.LruCache
-//import com.android.volley.toolbox.ImageLoader
+import android.support.v4.util.LruCache
 import groovy.transform.CompileStatic
 
 /*
@@ -17,7 +19,7 @@ class VolleyPlus {
 
     private static VolleyPlus mInstance
     private RequestQueue mRequestQueue
-//    private ImageLoader mImageLoader
+    private ImageLoader mImageLoader
     private static Context mCtx
     private static boolean clearCache
 
@@ -25,20 +27,31 @@ class VolleyPlus {
         mCtx = context
         mRequestQueue = getRequestQueue()
 
-//        mImageLoader = new ImageLoader(mRequestQueue,
-//                new ImageLoader.ImageCache() {
-//                    private final LruCache<String, Bitmap> cache = new LruCache<String, Bitmap>(20);
-//
-//                    @Override
-//                    Bitmap getBitmap(String url) {
-//                        cache.get(url)
-//                    }
-//
-//                    @Override
-//                    void putBitmap(String url, Bitmap bitmap) {
-//                        cache.put(url, bitmap)
-//                    }
-//                })
+
+        mImageLoader = new ImageLoader(mRequestQueue,
+                new /*ImageLoader.*/ImageCache() {
+                    private final LruCache<String, /*Bitmap*/BitmapDrawable> cache = new LruCache<String, /*Bitmap*/BitmapDrawable>(20)
+
+                    @Override
+                    /*Bitmap*/BitmapDrawable getBitmap(String url) {
+                        cache.get(url)
+                    }
+
+                    @Override
+                    void putBitmap(String url, /*Bitmap*/BitmapDrawable bitmap) {
+                        cache.put(url, bitmap)
+                    }
+
+                    @Override
+                    void clear() {
+                        cache.evictAll()
+                    }
+
+                    @Override
+                    void invalidateBitmap(String url) {
+                        cache.remove(url)
+                    }
+                })
     }
 
     static synchronized VolleyPlus getInstance(Context context, boolean clearCache = false) {
@@ -69,7 +82,7 @@ class VolleyPlus {
         requestQueue.add(req)
     }
 
-//    ImageLoader getImageLoader() {
-//        mImageLoader
-//    }
+    ImageLoader getImageLoader() {
+        mImageLoader
+    }
 }

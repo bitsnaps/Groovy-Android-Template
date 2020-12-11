@@ -3,9 +3,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="c:/gradle/current" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../gradle/current" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />

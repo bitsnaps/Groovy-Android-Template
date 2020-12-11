@@ -1,6 +1,7 @@
 package dz.crystalbox.groovyandroidtemplate
 
 import android.content.DialogInterface
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -13,7 +14,10 @@ import com.arasthel.swissknife.SwissKnife
 import com.arasthel.swissknife.annotations.InjectView
 import com.arasthel.swissknife.annotations.OnClick
 import com.arasthel.swissknife.annotations.SaveInstance
+import com.orm.SchemaGenerator
+import com.orm.SugarDb
 import com.orm.SugarRecord
+import com.orm.util.ReflectionUtil
 import dz.crystalbox.groovyandroidtemplate.component.AppComponent
 import dz.crystalbox.groovyandroidtemplate.component.DaggerAppComponent
 import dz.crystalbox.groovyandroidtemplate.helper.Async
@@ -72,9 +76,18 @@ class MainActivity extends AppCompatActivity {
         AppComponent appInjector = DaggerAppComponent.builder().build()
         appInjector.inject(this)
 
+        try {
+            // because of weird bug with SugarRecord I had to create tables manually
+            //def schema = new SugarDb(this)
+            //def sqlite = schema.getReadableDatabase()
+            SugarRecord.executeQuery("CREATE TABLE IF NOT EXISTS PERSON( ID INTEGER PRIMARY KEY, NAME VARCHAR(50), AGE INTEGER);")
+        } catch (Exception e){
+            log "SQL Exception Create: ${e.message}"
+        }
+
         // use the injected ORM (SugarORM)
         if (sugar.count(Person) == 0){
-            // create using @TupleConstructor
+            // created using @TupleConstructor
             new Person('Ibrahim', 34).save()
         }
 
@@ -90,7 +103,7 @@ class MainActivity extends AppCompatActivity {
             VolleyPlus.getInstance(owner, clearCache).addToRequestQueue(
                     new StringRequest(Request.Method.GET, "https://api.github.com",
                             {String response ->
-                                toast response show()
+                                toast(response).show()
                             }, { VolleyError error -> log error.message}){
                         @Override // additional headers
                         Map getHeaders(){
